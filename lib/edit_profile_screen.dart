@@ -73,7 +73,7 @@ class EditProfileScreen extends StatelessWidget {
             SizedBox(height: 16.0), // Add additional space below the button
           ],
         ),
-      ),
-    );
-  }
+      ),
+    );
+  }
 }

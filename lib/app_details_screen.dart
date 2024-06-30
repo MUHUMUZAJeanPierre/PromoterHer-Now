@@ -29,7 +29,7 @@ class AppDetailsScreen extends StatelessWidget {
                 SizedBox(height: 80.0),
                 Center(
                   child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper, magna nec maximus mollis, augue justo tristique tortor, et tristique felis est at ipsum. In hac habitasse platea dictumst. Sed nec tellus sed eros ultrices posuere non non nisi. Suspendisse potenti. Sed id orci in neque condimentum congue a sed est. Mauris et lectus augue. Vivamus ac urna in turpis egestas facilisis sit amet vel nunc. Vestibulum pretium libero quis sapien viverra egestas. Phasellus tempor diam purus, eget aliquet lacus aliquam quis. Nullam faucibus, augue sit amet ultricies scelerisque, odio magna venenatis tortor, vel consectetur elit est at lectus.',
+                    "aPromoter is an app with a mission to promote female participation in the tech and job markets. We aim to bridge the gender gap by creating and posting various job opportunities tailored to womens skills and aspirations. Our platform serves as a comprehensive resource where users can find job listings that align with their expertise and career goals.By providing access to a wide range of employment options, aPromoter empowers women to take the next step in their professional journeys. We understand the challenges women face in these industries and are dedicated to fostering an inclusive environment where they can thrive. Users can browse through numerous job postings, each carefully selected to ensure it matches their skill set and interests.",
                     style: TextStyle(fontSize: 16.0, color: Colors.white),
                   ),
                 ),
