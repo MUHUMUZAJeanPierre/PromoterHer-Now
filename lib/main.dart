@@ -1,6 +1,81 @@
+// import 'package:flutter/material.dart';
+// import 'splash_screen.dart';
+// import 'home_screen.dart';
+// import 'search_screen.dart';
+// import 'profile_screen.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: SplashScreen(),
+//     );
+//   }
+// }
+
+// class MainApp extends StatefulWidget {
+//   @override
+//   _MainAppState createState() => _MainAppState();
+// }
+
+// class _MainAppState extends State<MainApp> {
+//   int _selectedIndex = 0;
+
+//   final List<Widget> _screens = [
+//     HomeScreen(),
+//     SearchScreen(),
+//     ProfileScreen(),
+//   ];
+
+//   void _onItemTapped(int index) {
+//     setState(() {
+//       _selectedIndex = index;
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: _screens[_selectedIndex],
+//       bottomNavigationBar: BottomNavigationBar(
+//         items: const <BottomNavigationBarItem>[
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.home),
+//             label: 'Home',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.search),
+//             label: 'Search',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.person),
+//             label: 'Profile',
+//           ),
+//         ],
+//         currentIndex: _selectedIndex,
+//         onTap: _onItemTapped,
+//       ),
+//     );
+//   }
+// }
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Add this import
+import 'splash_screen.dart';
+import 'home_screen.dart';
+import 'search_screen.dart';
+import 'profile_screen.dart';
 
 void main() {
+  // Set the status bar to black
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.black, // Set status bar color to black
+    statusBarIconBrightness: Brightness.light, // Set status bar icon brightness
+  ));
+  
   runApp(MyApp());
 }
 
@@ -8,28 +83,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Promoter her',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MainPage(),
+      home: SplashScreen(),
     );
   }
 }
 
-class MainPage extends StatefulWidget {
+class MainApp extends StatefulWidget {
   @override
-  _MainPageState createState() => _MainPageState();
+  _MainAppState createState() => _MainAppState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainAppState extends State<MainApp> {
   int _selectedIndex = 0;
 
-  static List<Widget> _pages = <Widget>[
-    HomePage(),
-    Center(child: Text('Detail Page')),
-    UploadPage(),
-    Center(child: Text('Profile Page')),
+  final List<Widget> _screens = [
+    HomeScreen(),
+    SearchScreen(),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -41,15 +111,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 136, 168, 194),
-      appBar: AppBar(
-        title: Text(
-          'Promoter her',
-          style: TextStyle(color: Color.fromARGB(255, 134, 198, 250)), // Set title color to blue
-        ),
-        centerTitle: true,
-      ),
-      body: _pages[_selectedIndex],
+      body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -57,12 +119,8 @@ class _MainPageState extends State<MainPage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.work),
-            label: 'Details',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.upload),
-            label: 'Upload',
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -70,96 +128,8 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
         onTap: _onItemTapped,
       ),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  final List<Job> jobs = List.generate(
-    20,
-    (index) => Job(
-      imageUrl: 'https://www.springboard.com/blog/wp-content/uploads/2021/03/4-Reasons-Why-UI-Skills-Are-Critical-to-a-UX-Designer-scaled.jpg',
-      title: 'Job Title ${index + 1}',
-      description: 'Description for job ${index + 1}',
-      salary: '\$${(index + 1) * 1000}',
-    ),
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
-        ),
-        itemCount: jobs.length,
-        itemBuilder: (context, index) {
-          return JobCard(job: jobs[index]);
-        },
-      ),
-    );
-  }
-}
-
-class Job {
-  final String imageUrl;
-  final String title;
-  final String description;
-  final String salary;
-
-  Job({
-    required this.imageUrl,
-    required this.title,
-    required this.description,
-    required this.salary,
-  });
-}
-
-class JobCard extends StatelessWidget {
-  final Job job;
-
-  const JobCard({Key? key, required this.job}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.network(job.imageUrl),
-            SizedBox(height: 10),
-            Text(
-              job.title,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              job.description,
-              style: TextStyle(fontSize: 14),
-            ),
-            Text(
-              job.salary,
-              style: TextStyle(fontSize: 14, color: Colors.green),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class UploadPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Upload Page'),
     );
   }
 }

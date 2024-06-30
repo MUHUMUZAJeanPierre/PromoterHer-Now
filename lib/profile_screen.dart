@@ -15,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
           CircleAvatar(
             radius: 80.0,
             backgroundImage: AssetImage(
-              'assets/images/MuhumuzaImage.png', // Replace with actual image path
+              'assets/images/th.jpg', // Replace with actual image path
             ),
           ),
           SizedBox(height: 24.0),
