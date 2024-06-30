@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
                     (index) => DescriptiveContainer(
                       imagePath: images[index],
                       name: names[index],
-                      description: 'This is a description of ${names[index]}.',
+                      description: 'This is a description of ${names[index]}.', salary: '',
                     ),
                   ),
                 ),
