@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 color: Colors.white, // Text color on splash screen
               ),
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: 80.0),
             CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.white), // Color for the loading indicator
             ),

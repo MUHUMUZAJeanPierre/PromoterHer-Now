@@ -27,6 +27,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
+              Text(
+                'Welcome to promote ',
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
               SizedBox(height: 40),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Email address'),
@@ -97,21 +102,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'images/apple.jpeg',
-                    width:50,
-                    height: 50,
+                    'assets/images/apple.jpeg',
+                    width:40,
+                    height: 40,
                     ),
                   SizedBox(width: 10),
                   Image.asset(
-                    'images/google.jpeg',
-                    width:50,
-                    height: 50,
+                    'assets/images/google.jpeg',
+                    width:40,
+                    height: 40,
                     ),
                   SizedBox(width: 10),
                   Image.asset(
-                    'images/facebook.jpg',
-                    width:50,
-                    height: 50,
+                    'assets/images/facebook.jpg',
+                    width:40,
+                    height: 40,
                     ),
                 ],
               ),

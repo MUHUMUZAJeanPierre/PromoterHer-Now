@@ -15,7 +15,7 @@ class AppDetailsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(height: 70),
+                SizedBox(height: 60),
                 Center(
                   child: Text(
                     'Our Services',
@@ -26,14 +26,14 @@ class AppDetailsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 80.0),
+                SizedBox(height: 70.0),
                 Center(
                   child: Text(
                     "Promoter is an app with a mission to promote female participation in the tech and job markets. We aim to bridge the gender gap by creating and posting various job opportunities tailored to womens skills and aspirations. Our platform serves as a comprehensive resource where users can find job listings that align with their expertise and career goals.By providing access to a wide range of employment options, aPromoter empowers women to take the next step in their professional journeys. We understand the challenges women face in these industries and are dedicated to fostering an inclusive environment where they can thrive. Users can browse through numerous job postings, each carefully selected to ensure it matches their skill set and interests.",
                     style: TextStyle(fontSize: 16.0, color: Colors.white),
                   ),
                 ),
-                SizedBox(height: 100.0),
+                SizedBox(height: 80.0),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pushReplacement(

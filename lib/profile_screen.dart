@@ -6,7 +6,9 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: Text(
+          // 'Profile'
+          ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -15,12 +17,12 @@ class ProfileScreen extends StatelessWidget {
           CircleAvatar(
             radius: 80.0,
             backgroundImage: AssetImage(
-              'assets/images/th.jpg', // Replace with actual image path
+              'assets/images/MuhumuzaImage.png', // Replace with actual image path
             ),
           ),
           SizedBox(height: 24.0),
           Text(
-            'John Doe',
+            'Junior Didas',
             style: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.bold,
@@ -28,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: 8.0),
           Text(
-            'john.doe@example.com', // Replace with actual email
+            'junior@gmail.com', // Replace with actual email
             style: TextStyle(
               fontSize: 16.0,
               color: Colors.grey[600],
