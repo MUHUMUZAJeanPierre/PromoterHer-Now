@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutterearn/main.dart';
 import 'splash_screen.dart';
 import 'app_details_screen.dart';
 import 'login_screen.dart';
-import 'main.dart'; 
 import 'not_found_screem.dart';
 
 void main() {
@@ -14,13 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Routing Example',
-      initialRoute: '/splash', // Initial route set to splash screen
       routes: {
         '/splash': (context) => SplashScreen(),
         '/detail': (context) => AppDetailsScreen(),
         '/login_screen': (context) => LoginScreen(),
-        '/main': (context) => MainApp(),
-        // Add other routes as needed
+        '/main': (context) => MainApp(userName: '', userEmail: '',),
       },
       onGenerateRoute: (settings) {
         // Implement onGenerateRoute if necessary

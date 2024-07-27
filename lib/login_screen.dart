@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterearn/main.dart';
 import 'package:flutterearn/signup_screen.dart';
+import 'package:flutterearn/auth_service.dart'; // Import your AuthService class
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final AuthService _authService = AuthService(); // Instantiate AuthService
   String? email, password;
 
   @override
@@ -61,17 +63,49 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 65,
                 width: double.infinity,
                 child: ElevatedButton(
-                  // onPressed: _submitForm,
-                  onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainApp()),
-                      ); // Navigate to LoginScreen
-                    },
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      String? result = await _authService.login(
+                        email: email!,
+                        password: password!,
+                      );
+                      if (result == 'Success') {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MainApp(
+                              userName:
+                                  'John Doe', // Retrieve the user's name from Firebase or your database
+                              userEmail: email!,
+                            ),
+                          ),
+                        );
+                      } else {
+                        // Handle error, e.g., show a dialog with the result message
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Error'),
+                            content:
+                                Text(result ?? 'An unknown error occurred.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    }
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(255, 143, 34, 246)), // Use RGBA color
+                      Color.fromARGB(255, 143, 34, 246),
+                    ), // Use RGBA color
                   ),
                   child: Text(
                     'Log in',
@@ -103,21 +137,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Image.asset(
                     'assets/images/apple.jpeg',
-                    width:40,
+                    width: 40,
                     height: 40,
-                    ),
+                  ),
                   SizedBox(width: 10),
                   Image.asset(
                     'assets/images/google.jpeg',
-                    width:40,
+                    width: 40,
                     height: 40,
-                    ),
+                  ),
                   SizedBox(width: 10),
                   Image.asset(
                     'assets/images/facebook.jpg',
-                    width:40,
+                    width: 40,
                     height: 40,
-                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 24),
@@ -127,7 +161,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: TextButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(255, 143, 34, 246)), // Use RGBA color
+                      Color.fromARGB(255, 143, 34, 246),
+                    ), // Use RGBA color
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -150,22 +185,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  Widget _socialButton(String assetName) {
-    return InkWell(
-      onTap: () {
-        // Add functionality for social login
-      },
-      child: Image.asset(assetName, width: 40, height: 40),
-    );
-  }
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      // For demo purposes, navigate to '/profile' screen upon successful login
-      Navigator.pushNamed(context, '/profile');
-    }
   }
 }

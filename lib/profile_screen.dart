@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'edit_profile_screen.dart'; // Import EditProfileScreen
 
 class ProfileScreen extends StatelessWidget {
+  final String name;
+  final String email;
+
+  ProfileScreen({required this.name, required this.email, required userName, required userEmail});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          ''
-          ),
+        title: Text('Profile'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -22,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: 24.0),
           Text(
-            'Junior Didas',
+            name,
             style: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.bold,
@@ -30,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: 8.0),
           Text(
-            'junior@gmail.com', // Replace with actual email
+            email,
             style: TextStyle(
               fontSize: 16.0,
               color: Colors.grey[600],
@@ -45,8 +48,7 @@ class ProfileScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        EditProfileScreen(), // Navigate to EditProfileScreen
+                    builder: (context) => EditProfileScreen(), // Navigate to EditProfileScreen
                   ),
                 );
               },

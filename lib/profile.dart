@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'edit_profile_screen.dart'; // Import EditProfileScreen
 
 class ProfileScreen extends StatelessWidget {
+  final String userName;
+  final String userEmail;
+
+  ProfileScreen({required this.userName, required this.userEmail});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: 24.0),
           Text(
-            'John Doe',
+            userName,
             style: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.bold,
@@ -28,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: 8.0),
           Text(
-            'john.doe@example.com', // Replace with actual email
+            userEmail,
             style: TextStyle(
               fontSize: 16.0,
               color: Colors.grey[600],

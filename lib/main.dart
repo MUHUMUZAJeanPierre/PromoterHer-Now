@@ -62,19 +62,26 @@
 //     );
 //   }
 // }
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutterearn/profile.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // Add this import
 import 'splash_screen.dart';
 import 'home_screen.dart';
 import 'search_screen.dart';
-import 'profile_screen.dart';
 
-void main() {
+void main() async {
   // Set the status bar to black
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.black, // Set status bar color to black
     statusBarIconBrightness: Brightness.light, // Set status bar icon brightness
   ));
+
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   
   runApp(MyApp());
 }
@@ -89,6 +96,11 @@ class MyApp extends StatelessWidget {
 }
 
 class MainApp extends StatefulWidget {
+  final String userName;
+  final String userEmail;
+
+  MainApp({required this.userName, required this.userEmail});
+
   @override
   _MainAppState createState() => _MainAppState();
 }
@@ -96,11 +108,17 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [
-    HomeScreen(),
-    SearchScreen(),
-    ProfileScreen(),
-  ];
+  late final List<Widget> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+      HomeScreen(),
+      SearchScreen(),
+      ProfileScreen(userName: widget.userName, userEmail: widget.userEmail),
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {

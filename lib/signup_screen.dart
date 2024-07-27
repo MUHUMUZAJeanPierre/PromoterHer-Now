@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterearn/login_screen.dart';
-// import 'package:flutterearn/home_screen.dart';
-import 'package:flutterearn/main.dart';
+import 'package:flutterearn/auth_service.dart'; // Import your AuthService class
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -15,6 +14,7 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController _phoneController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  final AuthService _authService = AuthService(); // Instantiate AuthService
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +25,12 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(height:30),
+              SizedBox(height: 30),
               Center(
                 child: Text(
                   'Create Account',
                   style: TextStyle(
-                    color:Colors.black,
+                    color: Colors.black,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
@@ -106,25 +106,37 @@ class _SignupScreenState extends State<SignupScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 143, 34, 246)), // Use RGBA color
+                      backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 143, 34, 246)),
                     ),
-                     onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LoginScreen()),
-                      ); // Navigate to LoginScreen
+                    onPressed: () async {
+                      String? result = await _authService.registration(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+                      if (result == 'Success') {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginScreen()),
+                        );
+                      } else {
+                        // Handle error, e.g., show a dialog with the result message
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Error'),
+                            content: Text(result ?? 'An unknown error occurred.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                     },
-                    // onPressed: () {
-                    //   // Implement your signup logic here
-                    //   // For demonstration, print the input values
-                    //   print('Name: ${_nameController.text}');
-                    //   print('Gender: ${_genderController.text}');
-                    //   print('Address: ${_addressController.text}');
-                    //   print('Phone Number: ${_phoneController.text}');
-                    //   print('Email: ${_emailController.text}');
-                    //   print('Password: ${_passwordController.text}');
-                    // },
                     child: Text(
                       'Create Account',
                       style: TextStyle(color: Colors.white),
